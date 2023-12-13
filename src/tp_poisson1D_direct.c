@@ -6,6 +6,13 @@
 #include "lib_poisson1D.h"
 #include "atlas_headers.h"
 
+void set_grid_points_1D(double* X, int* la) {
+  double h = (T1 - T0) / (double)(*la + 1);  // on calcul le pas.
+  for (int jj = 0; jj < *la; jj++) {
+    X[jj] = T0 + (jj + 1) * h;
+  }
+}
+
 int main(int argc,char *argv[])
 /* ** argc: Nombre d'arguments */
 /* ** argv: Valeur des arguments */
