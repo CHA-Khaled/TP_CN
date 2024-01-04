@@ -23,3 +23,4 @@ int indexABCol(int i, int j, int *lab);
 int dgbtrftridiag(int *la, int *n, int *kl, int *ku, double *AB, int *lab, int *ipiv, int *info);
 double relative_forward_error(double* x, double* y, int* la);
 void eig_poisson1D(double* eigval, int *la);
+double eigmax_poisson1D(int *la);
