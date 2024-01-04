@@ -76,6 +76,10 @@ int indexABCol(int i, int j, int *lab){
   return j*(*lab)+i;
 }
 
+int dgbtrftridiag(int *la, int*n, int *kl, int *ku, double *AB, int *lab, int *ipiv, int *info){
+  return *info;
+}
+
 void write_GB_operator_rowMajor_poisson1D(double* AB, int* lab, int* la, char* filename){
   FILE * file;
   int ii,jj;
