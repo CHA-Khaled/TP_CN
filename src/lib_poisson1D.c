@@ -60,6 +60,12 @@ void set_analytical_solution_DBC_1D(double* EX_SOL, double* X, int* la, double* 
 } 
 
 void set_grid_points_1D(double* x, int* la){
+  int jj;
+  double h;
+  h=1.0/(1.0*((*la)+1));
+  for (jj=0;jj<(*la);jj++){
+    x[jj]=(jj+1)*h;
+  }
 }
 
 void write_GB_operator_rowMajor_poisson1D(double* AB, int* lab, int* la, char* filename){
