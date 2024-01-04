@@ -25,3 +25,4 @@ double relative_forward_error(double* x, double* y, int* la);
 void eig_poisson1D(double* eigval, int *la);
 double eigmax_poisson1D(int *la);
 double eigmin_poisson1D(int *la);
+double richardson_alpha_opt(int *la);
