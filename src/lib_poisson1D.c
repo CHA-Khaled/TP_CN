@@ -51,7 +51,13 @@ void set_dense_RHS_DBC_1D(double* RHS, int* la, double* BC0, double* BC1){
 }   
 
 void set_analytical_solution_DBC_1D(double* EX_SOL, double* X, int* la, double* BC0, double* BC1){
-}  
+  int jj;
+  double h, DELTA_T;
+  DELTA_T=(*BC1)-(*BC0);
+  for (jj=0;jj<(*la);jj++){
+    EX_SOL[jj] = (*BC0) + X[jj]*DELTA_T;
+  }
+} 
 
 void set_grid_points_1D(double* x, int* la){
 }
