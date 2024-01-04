@@ -171,10 +171,3 @@ void write_xy(double* vec, double* x, int* la, char* filename){
     perror(filename);
   } 
 }  
-
-int indexABCol(int i, int j, int *lab){
-  return 0;
-}
-int dgbtrftridiag(int *la, int*n, int *kl, int *ku, double *AB, int *lab, int *ipiv, int *info){
-  return *info;
-}
