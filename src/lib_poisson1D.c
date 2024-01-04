@@ -42,7 +42,13 @@ void set_GB_operator_colMajor_poisson1D_Id(double* AB, int *lab, int *la, int *k
 }
 
 void set_dense_RHS_DBC_1D(double* RHS, int* la, double* BC0, double* BC1){
-}  
+  int jj;
+  RHS[0]= *BC0;
+  RHS[(*la)-1]= *BC1;
+  for (jj=1;jj<(*la)-1;jj++){
+    RHS[jj]=0.0;
+  }
+}   
 
 void set_analytical_solution_DBC_1D(double* EX_SOL, double* X, int* la, double* BC0, double* BC1){
 }  
