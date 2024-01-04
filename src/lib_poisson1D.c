@@ -72,6 +72,10 @@ double relative_forward_error(double* x, double* y, int* la){
   return 0;
 }
 
+int indexABCol(int i, int j, int *lab){
+  return j*(*lab)+i;
+}
+
 void write_GB_operator_rowMajor_poisson1D(double* AB, int* lab, int* la, char* filename){
   FILE * file;
   int ii,jj;
