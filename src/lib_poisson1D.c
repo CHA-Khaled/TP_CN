@@ -25,6 +25,20 @@ void set_GB_operator_colMajor_poisson1D(double* AB, int *lab, int *la, int *kv){
 }
 
 void set_GB_operator_colMajor_poisson1D_Id(double* AB, int *lab, int *la, int *kv){
+  int ii, jj, kk;
+  for (jj=0;jj<(*la);jj++){
+    kk = jj*(*lab);
+    if (*kv>=0){
+      for (ii=0;ii< *kv;ii++){
+	AB[kk+ii]=0.0;
+      }
+    }
+    AB[kk+ *kv]=0.0;
+    AB[kk+ *kv+1]=1.0;
+    AB[kk+ *kv+2]=0.0;
+  }
+  AB[1]=0.0;
+  AB[(*lab)*(*la)-1]=0.0;
 }
 
 void set_dense_RHS_DBC_1D(double* RHS, int* la, double* BC0, double* BC1){
