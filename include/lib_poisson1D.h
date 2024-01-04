@@ -8,6 +8,7 @@
 #include <math.h>
 #include <float.h>
 #include <limits.h>
+#include "atlas_headers.h"
 
 void set_GB_operator_colMajor_poisson1D(double* AB, int* lab, int *la, int *kv);
 void set_GB_operator_colMajor_poisson1D_Id(double* AB, int* lab, int *la, int *kv);
@@ -27,3 +28,4 @@ double eigmax_poisson1D(int *la);
 double eigmin_poisson1D(int *la);
 double richardson_alpha_opt(int *la);
 void richardson_alpha(double *AB, double *RHS, double *X, double *alpha_rich, int *lab, int *la,int *ku, int*kl, double *tol, int *maxit, double *resvec, int *nbite);
+void extract_MB_jacobi_tridiag(double *AB, double *MB, int *lab, int *la,int *ku, int*kl, int *kv);
