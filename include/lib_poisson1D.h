@@ -26,3 +26,4 @@ void eig_poisson1D(double* eigval, int *la);
 double eigmax_poisson1D(int *la);
 double eigmin_poisson1D(int *la);
 double richardson_alpha_opt(int *la);
+void richardson_alpha(double *AB, double *RHS, double *X, double *alpha_rich, int *lab, int *la,int *ku, int*kl, double *tol, int *maxit, double *resvec, int *nbite);
