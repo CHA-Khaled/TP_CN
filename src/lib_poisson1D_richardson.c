@@ -117,8 +117,50 @@ double richardson_alpha_opt(int *la){
   return 0;
 }
 
-void richardson_alpha(double *AB, double *RHS, double *X, double *alpha_rich, int *lab, int *la,int *ku, int*kl, double *tol, int *maxit, double *resvec, int *nbite){
+
+void richardson_alpha(double *AB, double *RHS, double *X, double *alpha_rich, int *lab, int *la, int *ku, int *kl, double *tol, int *maxit, double *resvec, int *nbite) {
+    int i, j, it;
+    double res, diff, normb;
+
+    int N = *la + *ku + *kl;
+
+    for (i = 0; i < N; i++) {
+        X[i] = 0.0;
+        resvec[i] = RHS[i];
+        for (j = 0; j < N; j++){
+            resvec[i] -= AB[i * (*lab) + j] * X[j];
+    }
+    }
+    normb = 0.0;
+    for (i = 0; i < N; i++){
+        normb += RHS[i] * RHS[i];
+        }
+    normb = sqrt(normb);
+    it = 0;
+    do {
+        for(i = 0; i < N; i++) {
+            X[i] += *alpha_rich * resvec[i];
+            resvec[i] = RHS[i];
+            for(j = 0; j < N; j++){
+                resvec[i] -= AB[i * (*lab) + j] * X[j];
+                }
+        }
+        res = 0.0;
+        for(i = 0; i < N; i++){
+            res += resvec[i] * resvec[i];
+            }
+        res = sqrt(res);
+        diff = 0.0;
+        for(i = 0; i < N; i++){
+            diff += fabs(*alpha_rich * resvec[i]);
+            }
+        it++;
+        resvec[it] = res;
+
+    }while(res/normb > *tol && it < *maxit);
+    *nbite = it;
 }
+
 
 void extract_MB_jacobi_tridiag(double *AB, double *MB, int *lab, int *la,int *ku, int*kl, int *kv){
 }
