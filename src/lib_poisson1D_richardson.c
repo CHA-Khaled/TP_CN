@@ -201,6 +201,56 @@ void extract_MB_jacobi_tridiag(double *AB, double *MB, int *lab, int *la,int *ku
 void extract_MB_gauss_seidel_tridiag(double *AB, double *MB, int *lab, int *la,int *ku, int*kl, int *kv){
 }
 
-void richardson_MB(double *AB, double *RHS, double *X, double *MB, int *lab, int *la,int *ku, int*kl, double *tol, int *maxit, double *resvec, int *nbite){
+void richardson_MB(double *AB, double *RHS, double *X, double *MB, int *lab, int *la, int *ku, int *kl, double *tol, int *maxit, double *resvec, int *nbite) {
+    int i, j, it;
+    double res, diff, normb;
+
+    int N = *la + *ku + *kl;
+
+    for (i = 0; i < N; i++){
+        X[i] = 0.0;
+	}
+	
+    for (i = 0; i < N; i++) {
+        resvec[i] = RHS[i];
+        for (j = 0; j < N; j++){
+            resvec[i] -= AB[i * (*lab) + j] * X[j];
+            }
+    }
+    
+    normb = 0.0;
+    for (i = 0; i < N; i++){
+        normb += RHS[i] * RHS[i];
+        }
+    normb = sqrt(normb);
+    it = 0;
+    do {
+        for (i = 0; i < N; i++){
+            X[i] += resvec[i] / MB[i * (*la) + i];
+            }
+            
+        for(i=0;i<N;i++){
+            resvec[i]=RHS[i];
+            for (j=0;j<N;j++){
+                resvec[i] -= AB[i * (*lab) + j] * X[j];
+                }
+        }
+
+        res = 0.0;
+        for (i=0;i<N;i++){
+            res +=resvec[i]*resvec[i];
+            }
+        res=sqrt(res);
+
+        diff = 0.0;
+        for(i=0;i<N;i++){
+            diff += fabs(X[i]);
+            }
+        it++;
+        resvec[it]=res;
+
+    }while(res / normb > *tol && it < *maxit);
+    *nbite = it;
 }
+
 
