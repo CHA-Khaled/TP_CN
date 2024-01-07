@@ -68,8 +68,20 @@ void set_grid_points_1D(double* x, int* la){
   }
 }
 
-double relative_forward_error(double* x, double* y, int* la){
-  return 0;
+double relative_forward_error(double* x, double* y, int* la) {
+    double max_err = 0.0;
+    int jj;
+    for (jj = 0; jj < (*la); jj++) {
+        double abs_err = fabs(x[jj] - y[jj]);
+        double abs_x = fabs(x[jj]);
+        if (abs_x > 1e-10) {
+            double rel_err = abs_err / abs_x;
+            max_err = fmax(max_err, rel_err);
+        } else {
+            max_err = fmax(max_err, abs_err);
+        }
+    }
+    return max_err;
 }
 
 int indexABCol(int i, int j, int *lab){
