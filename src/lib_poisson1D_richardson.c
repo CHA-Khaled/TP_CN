@@ -195,10 +195,28 @@ void richardson_alpha(double *AB, double *RHS, double *X, double *alpha_rich, in
 }
 
 
-void extract_MB_jacobi_tridiag(double *AB, double *MB, int *lab, int *la,int *ku, int*kl, int *kv){
+void extract_MB_jacobi_tridiag(double *AB, double *MB, int *lab, int *la, int *ku, int *kl, int *kv) {
+    int N = *la + *ku + *kl;
+    
+    for(int i=0;i<N;i++){
+        for(int j=0;j<N;j++){
+            MB[i*(*kv)+j]=0.0;
+        }
+    }
+    
+    for(int i=0;i<N;i++){
+        MB[i*(*kv)+i]=AB[i*(*lab)+i];
+        if(i<N-1){
+            MB[i*(*kv)+i+1]=AB[i*(*lab)+i+1];
+        }
+        if(i>0){
+            MB[i*(*kv)+i-1]=AB[i*(*lab)+i-1];
+        }
+    }
 }
 
 void extract_MB_gauss_seidel_tridiag(double *AB, double *MB, int *lab, int *la,int *ku, int*kl, int *kv){
+
 }
 
 void richardson_MB(double *AB, double *RHS, double *X, double *MB, int *lab, int *la, int *ku, int *kl, double *tol, int *maxit, double *resvec, int *nbite) {
