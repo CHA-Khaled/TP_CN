@@ -307,3 +307,31 @@ void dcscmv(int m, int n, int nnz, double *values, int *row_indices, int *col_pt
     }
 }
 
+
+void CSR(double *AB, int n, double **values, int **col_indices, int **row_ptr, int *nnz){
+    *nnz=0;
+    for(int i=0;i<n;i++){
+        for(int j=0; j<n; j++){
+            if(AB[i * n + j] !=0.0){
+                (*nnz)++;
+            }
+        }
+    }
+    *values = (double *)malloc(*nnz * sizeof(double));
+    *col_indices = (int *)malloc(*nnz * sizeof(int));
+    *row_ptr = (int *)malloc((n + 1) * sizeof(int));
+
+    int k = 0;
+
+    for(int i=0;i<n;i++){
+        (*row_ptr)[i] = k;
+        for(int j=0;j<n;j++){
+            if(AB[i*n + j] !=0.0){
+                (*values)[k]=AB[i*n+j];
+                (*col_indices)[k] = j;
+                k++;
+            }
+        }
+    }
+    (*row_ptr)[n]=k;
+}
