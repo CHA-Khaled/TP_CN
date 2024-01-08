@@ -34,3 +34,4 @@ void richardson_MB(double *AB, double *RHS, double *X, double *MB, int *lab, int
 void dcsrmv(int m, int n, int nnz, double *values, int *col_indices, int *row_ptr, double *x, double *y);
 void dcscmv(int m, int n, int nnz, double *values, int *row_indices, int *col_ptr, double *x, double *y);
 void CSR(double *AB, int n, double **values, int **col_indices, int **row_ptr, int *nnz);
+void CSC(double *AB, int n, double **values, int **row_indices, int **col_ptr, int *nnz);
