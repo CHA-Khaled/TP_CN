@@ -297,3 +297,13 @@ void dcsrmv(int m, int n, int nnz, double *values, int *col_indices, int *row_pt
     }
 }
 
+void dcscmv(int m, int n, int nnz, double *values, int *row_indices, int *col_ptr, double *x, double *y) {
+    for(int j=0;j<n;j++){
+        double sum=0.0;
+        for(int i=col_ptr[j];i<col_ptr[j+1];i++){
+            sum += values[i] * x[row_indices[i]];
+        }
+        y[j]=sum;
+    }
+}
+
