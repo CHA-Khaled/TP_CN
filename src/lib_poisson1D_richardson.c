@@ -335,3 +335,34 @@ void CSR(double *AB, int n, double **values, int **col_indices, int **row_ptr, i
     }
     (*row_ptr)[n]=k;
 }
+
+
+void CSC(double *AB, int n,double **values, int **row_indices, int **col_ptr, int *nnz){
+    *nnz = 0;
+    for(int i=0;i<n;i++){
+        for(int j=0;j<n;j++){
+            if(AB[i*n+j]!=0.0){
+                (*nnz)++;
+            }
+        }
+    }
+    *values = (double *)malloc(*nnz * sizeof(double));
+    *row_indices = (int *)malloc(*nnz * sizeof(int));
+    *col_ptr = (int *)malloc((n + 1) * sizeof(int));
+
+    int k = 0;
+    
+    for(int j=0;j<n;j++){
+        (*col_ptr)[j]=k;
+        for(int i=0;i<n;i++){
+            if(AB[i * n + j] !=0.0){
+                (*values)[k] = AB[i*n+ j];
+                (*row_indices)[k]=i;
+                k++;
+            }
+        }
+    }
+    (*col_ptr)[n]=k;
+}
+
+
