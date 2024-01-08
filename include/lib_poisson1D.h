@@ -33,3 +33,4 @@ void extract_MB_gauss_seidel_tridiag(double *AB, double *MB, int *lab, int *la,i
 void richardson_MB(double *AB, double *RHS, double *X, double *MB, int *lab, int *la,int *ku, int*kl, double *tol, int *maxit, double *resvec, int *nbite);
 void dcsrmv(int m, int n, int nnz, double *values, int *col_indices, int *row_ptr, double *x, double *y);
 void dcscmv(int m, int n, int nnz, double *values, int *row_indices, int *col_ptr, double *x, double *y);
+void CSR(double *AB, int n, double **values, int **col_indices, int **row_ptr, int *nnz);
