@@ -287,5 +287,13 @@ void richardson_MB(double *AB, double *RHS, double *X, double *MB, int *lab, int
     }while(res / normb > *tol && it < *maxit);
     *nbite = it;
 }
-
+void dcsrmv(int m, int n, int nnz, double *values, int *col_indices, int *row_ptr, double *x, double *y) {
+    for(int i=0;i<m;i++){
+        double sum=0.0;
+        for (int j=row_ptr[i];j<row_ptr[i+1];j++){
+            sum += values[j]*x[col_indices[j]];
+        }
+        y[i]=sum;
+    }
+}
 
